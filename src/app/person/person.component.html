@@ -1,0 +1,87 @@
+<div >
+    <div class="container" style="margin-top: 70px;">
+      <div class="content-center">
+          
+              
+                  <div class="header header-primary text-center">
+                      
+                          <h2>Enter Person Data</h2>
+                      
+                  </div><br>
+                  <div class="was-validated">
+                  <div class="row row-cols-2 mb-1">
+                  
+                    
+                    <div class="col p-3">
+                      
+                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                        
+                      </div>
+
+                      <label for="Enter Person Id" style="font-size: large;"><b>Enter Person Id: </b></label><br>
+
+                        <input type="text" placeholder="Enter Person Id" id="personId"class="form-control" name="personId" [(ngModel)]="person.personId" (focus)="focus=true" (blur)="focus=false" required="true" >
+                      
+                      </div>
+                  
+
+                    <div class="col p-3">
+                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                      
+                      </div>
+                      <label for="Enter firstName" style="font-size: large;"><b>Enter FirstName: </b></label><br>
+                      <input type="text" placeholder="Enter Person firstName" id="firstName"class="form-control" name="firstName" [(ngModel)]="person.firstName" (focus)="focus=true" (blur)="focus=false" required="true">
+                    
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 mb-1">
+                 <div class="col p-3">
+                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                      </div>
+                      <label for="Enter lastName" style="font-size: large;"><b>Enter LastName: </b></label><br>
+                      <input type="text" class="form-control" placeholder="Enter Person lastName" id="lastName" name="lastName" [(ngModel)]="person.lastName"(focus)="focus=true" (blur)="focus=false" required="true">
+                     
+                    
+                </div>
+                
+                     
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                          </div>
+                          <i class="fa fa-calendar"></i>
+                          <label for="dob" style="font-size: large;"><b>Enter DOB: </b></label><br>  
+                          <input type="date" placeholder="Enter Person Date of Birth" class="form-control" id="dob" name="dob" [(ngModel)]="person.dob"(focus)="focus1=true" (blur)="focus1=false" required="true">
+                          
+                        </div>
+                     
+                </div>
+            
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                          </div>
+                          <label for="Enter Country" style="font-size: large;"><b>Enter Country: </b></label><br> 
+                          <input type="text" placeholder="Enter Country" class="form-control" (focus)="focus1=true" id="country" name="country" [(ngModel)]="person.country"(blur)="focus1=false" required="true">
+                          
+                        </div>
+                    </div> 
+                    
+                   
+                  </div>
+
+                  <br>
+                 <div class="footer text-center">
+                      <a routerLink="/person" (click)="createPerson(person)" class="btn btn-primary btn-round btn-lg btn-block">Register</a>
+                  </div>
+                  
+                  
+          
+      </div>
+  </div>  
+</div>
+
+
+
+
