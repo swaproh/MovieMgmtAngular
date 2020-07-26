@@ -1,0 +1,37 @@
+<div>
+  <div class="container" style="margin-top: 70px;">
+    <div class="content-center">
+
+
+      <div class="header header-primary text-center">
+
+        <h2>Enter Language Data</h2>
+
+      </div><br>
+      <div class="was-validated">
+        <div class="row row-cols-2 mb-1">
+
+
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+
+            </div>
+            <label for="langName" style="font-size: large;"><b>Enter Language Name: </b></label><br>
+            <input type="text" placeholder="Enter Language Name" id="langName" class="form-control" name="langName"
+              [(ngModel)]="lang.name" (focus)="focus=true" (blur)="focus=false" required="true">
+
+          </div>
+        </div>
+
+        <br>
+
+        <div class="footer text-center">
+          <a routerLink="/language" (click)="createLanguage(lang)"
+            class="btn btn-primary btn-round btn-lg btn-block">Register</a>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>

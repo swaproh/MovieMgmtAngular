@@ -1,0 +1,40 @@
+<div class="container_fluid" style="margin-top: 70px;">
+    <h3>Language details</h3>
+    <div class="tab">
+      <button class="tablinks" routerLink="/language" (click)="createLanguage(language)">Register Language</button>
+      </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>LanguageName</th>
+          <th>Operation1</th>
+          <th>Operation2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lang of languages">
+
+            <td>{{lang.name}}</td>
+            <td><button type="submit" (click)="readLanguage(lang.id)" class="btn btn-primary">UPDATE</button></td>
+            <td><button type="submit" (click)="deleteLanguage(lang.id)" class="btn btn-primary">DELETE</button></td>
+          </tr>
+        </tbody>
+      </table> 
+
+      <div class="updateLanguage" *ngIf="updateModal">
+        <div class="update-content">
+          <form>
+              <div class="form-group">
+                  <label for="langName" style="color:rgb(137, 47, 255);">LanguageName</label>
+                  <input type="text" placeholder="Enter LanguageName" class="form-control" name="langName" [(ngModel)]="lang.name">
+               </div>
+               
+             
+          </form>
+          <div class="btn-row">
+            <button (click)="updateLanguage(lang)">Update</button>
+            <button (click)="closeModal()">Cancle</button>
+          </div>
+      </div>
+      </div>
+</div>

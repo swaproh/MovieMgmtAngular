@@ -16,6 +16,16 @@ import { PersondashboardComponent } from './person/persondashboard/persondashboa
 import { RoledashboardComponent } from './role/roledashboard/roledashboard.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanyDashboardComponent } from './company/company-dashboard/company-dashboard.component';
+import { LanguageComponent } from './language/language.component';
+import { CountryComponent } from './country/country.component';
+import { CountryDashboardComponent } from './country/country-dashboard/country-dashboard.component';
+import { LanguageDashboardComponent } from './language/language-dashboard/language-dashboard.component';
+import { SongComponent } from './song/song.component';
+import { SongDashboardComponent } from './Song/song-dashboard/song-dashboard.component';
+import { RaagComponent } from './raag/raag.component';
+import { RaagDashboardComponent } from './Raag/raag-dashboard/raag-dashboard.component';
 
 
 
@@ -33,6 +43,16 @@ import { LoginComponent } from './login/login.component';
     RoledashboardComponent,
     HomeComponent,
     LoginComponent,
+    CompanyComponent,
+    CompanyDashboardComponent,
+    LanguageComponent,
+    LanguageDashboardComponent,
+    CountryComponent,
+    CountryDashboardComponent,
+    SongComponent,
+    SongDashboardComponent,
+    RaagComponent,
+    RaagDashboardComponent,
   ],
   imports: [
     BrowserModule,

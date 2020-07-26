@@ -18,6 +18,7 @@ export class MovieDashboardComponent implements OnInit {
   all : boolean= true;
   read : boolean= false;
   updateModal: any = false;
+  viewModal: any = false;
   constructor(private dataService:DataService  ,  private router: Router,
     private activatedrouter: ActivatedRoute) { 
     
@@ -31,11 +32,13 @@ export class MovieDashboardComponent implements OnInit {
 
   updateMovie(movie){
     this.updateModal = false;
-     this.dataService.updateMovie(this.movie).subscribe(rs=>alert('Movie Updated'))
+     this.dataService.updateMovie(this.movie).subscribe(rs=>alert('Movie Updated'),
+     err=>{ alert('Exception occured')})
   }
 
   deleteMovie(id){
-    this.dataService.deleteMovie(id).subscribe(rs=>alert('Movie Deleted'))
+    this.dataService.deleteMovie(id).subscribe(rs=>alert('Movie Deleted'),
+    err=>{ alert('Exception occured')})
   }
 
   readAllMovie(){
@@ -56,7 +59,12 @@ export class MovieDashboardComponent implements OnInit {
 
   closeModal(){
     this.updateModal = false;
+    this.viewModal = false;
   }
 
+  viewMovie(id){
+    this.viewModal = true;
+    this.dataService.readMovie(id).subscribe(rs=>{this.movie=rs,console.log(this.movie);});
+  }
 
 }

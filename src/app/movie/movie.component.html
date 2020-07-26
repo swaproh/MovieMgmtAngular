@@ -23,16 +23,6 @@
             <div class="col p-3">
               <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
               </div>
-
-              <label for="MovieId" style="font-size:x-large; color: crimson;"><b>MovieId: </b></label><br>
-              <input type="text" formControlName="movieId" placeholder="Enter Movie Id" id="movieId"
-                class="form-control" name="movieId" (focus)="focus=true" (blur)="focus=false" required="true">
-            </div>
-
-
-            <div class="col p-3">
-              <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
-              </div>
               <label for="movieName" style="font-size:x-large; color: crimson;"><b>MovieName: </b></label><br>
               <input type="text" formControlName="movieName" placeholder="Enter Movie name" id="movieName"
                 class="form-control" name="movieName" (focus)="focus=true" (blur)="focus=false" required="true">
@@ -52,18 +42,19 @@
             </div>
 
 
-            <div formArrayName="productionCompanies">
-              <label for="MovieBasedOn" style="font-size:x-large; color: crimson;"><b> Production
-                Company:</b></label><br>
-              <div *ngFor="let item of productionCompanies.controls; let nameIndex=index"
+            <div formArrayName="productionCompany">
+              <label for="productionCompany" style="font-size:x-large; color: crimson;"><b> Production
+                  Company:</b></label><br>
+              <div *ngFor="let comp of getProductionCompany(movieForm); let nameIndex=index"
                 [formGroupName]="nameIndex">
-                
-                <input id="prodCom" formControlName="name" type="text" placeholder="Enter Production Company"
-                  class="form-control" required="true"/>
-                <input type="button" value="Delete" (click)="deleteProdCompany(nameIndex)" />
-              
-              <input type="button" value="Add" (click)="addProdCompany()" />
-            </div>
+                  <select class="form-control" formControlName="id">
+                    <option value="">Choose Production Company</option>
+                    <option *ngFor="let r of companyArray" [ngValue]="r.id">{{r.name}}</option>
+                    </select>
+                <input type="button" value="Delete" (click)="removeProdCompany(nameIndex)" />
+
+                <input type="button" value="Add" (click)="addProdCompany()" />
+              </div>
             </div>
 
           </div>
@@ -73,18 +64,19 @@
             <div class="col p-3">
               <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
               </div>
-              <div formArrayName="distributionCompanies">
+              <div formArrayName="distributedBy">
                 <label for="distributedBy" style="font-size:x-large; color: crimson;"><b> Distribute
-                  Company:</b></label><br>
-                <div *ngFor="let item of distributionCompanies.controls; let nameIndex=index"
-                  [formGroupName]="nameIndex">
-                  
-                  <input id="distCom" formControlName="name" type="text" placeholder="Enter Production Company"
-                    class="form-control" required="true">
-                  <input type="button" value="Delete" (click)="deleteDistCompany(nameIndex)" />
-               
-                <input type="button" value="Add" (click)="addDistCompany()" />
-              </div>
+                    Company:</b></label><br>
+                <div *ngFor="let comp of getDistributedBy(movieForm); let nameIndex=index" [formGroupName]="nameIndex">
+
+                  <select class="form-control" formControlName="id">
+                    <option value="">Choose Distribution Company</option>
+                    <option *ngFor="let r of companyArray" [ngValue]="r.id">{{r.name}}</option>
+                    </select>
+                  <input type="button" value="Delete" (click)="removeDistributedBy(nameIndex)" />
+
+                  <input type="button" value="Add" (click)="addDistCompany()" />
+                </div>
               </div>
 
             </div>
@@ -92,17 +84,18 @@
             <div class="col p-3">
               <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
               </div>
-              <div formArrayName="languages">
+              <div formArrayName="language">
                 <label for="language" style="font-size:x-large; color: crimson;"><b> Language:</b></label><br>
-                <div *ngFor="let item of languages.controls; let nameIndex=index"
-                  [formGroupName]="nameIndex">
-                  
-                  <input id="language" formControlName="name" type="text" placeholder="Enter Language"
-                    class="form-control" required="true">
-                  <input type="button" value="Delete" (click)="deleteLanguage(nameIndex)" />
-                
-                <input type="button" value="Add" (click)="addLanguage()" />
-              </div>
+                <div *ngFor="let lang of getLanguage(movieForm); let nameIndex=index" [formGroupName]="nameIndex">
+
+                  <select class="form-control" formControlName="id">
+                    <option value="">Choose Language</option>
+                    <option *ngFor="let r of languageArray" [ngValue]="r.id">{{r.name}}</option>
+                    </select>
+                  <input type="button" value="Delete" (click)="removeLanguage(nameIndex)" />
+
+                  <input type="button" value="Add" (click)="addLanguage()" />
+                </div>
               </div>
 
             </div>
@@ -110,36 +103,46 @@
             <div class="col p-3">
               <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
               </div>
-              <div formArrayName="crewMembers">
+              <div formArrayName="personDTO">
                 <label for="crewMemberL" style="font-size:x-large; color: crimson;"><b> Member Name:</b></label>
-                <div *ngFor="let item of crewMembers.controls; let crewMemberIndex=index"
-                  [formGroupName]="crewMemberIndex">
-                  
+                <div *ngFor="let person of getPersonDTO(movieForm); let personIndex=index"
+                  [formGroupName]="personIndex">
+
                   <!--<input id="MemberName" formControlName="crewMember" type="text" placeholder="Enter Crew Member"
                     class="form-control" required="true">-->
-                    <select class="form-control" formControlName="person">
-                      <option value="">Choose Crew</option>
-                      <option *ngFor="let r of PersonArray" [ngValue]="r">{{r.firstName+' '+r.lastName}}</option>
-                   </select>
-                   <!-- <input id="roleName" formControlName="role" type="text" placeholder="Enter role"
+                  <select class="form-control" formControlName="personId">
+                    <option value="">Choose Crew</option>
+                    <option *ngFor="let r of PersonArray" [ngValue]="r.personId">{{r.firstName+' '+r.lastName}}</option>
+                  </select>
+                  <!-- <input id="roleName" formControlName="role" type="text" placeholder="Enter role"
                     class="form-control" required="true"> (change)="changeRole($event)"-->
-                    <div formArrayName="person">
-                      <div *ngFor="let item of person.controls; let roleDTOIndex=index"
-                  [formGroupName]="roleDTOIndex">
-                    <select  class="form-control" formControlName="roleDTO">
-                      <option value="">Choose Role</option>
-                      <option *ngFor="let r of RolesArray" [ngValue]="r">{{r.roleName}}</option>
-                   </select>
-                   </div>
+                  <div formArrayName="roles">
+                    <div *ngFor="let role of getRoles(person); let roleDTOIndex=index" [formGroupName]="roleDTOIndex">
+                      <select class="form-control" formControlName="roleId">
+                        <option value="">Choose Role</option>
+                        <option *ngFor="let r of RolesArray" [ngValue]="r.roleId">{{r.roleName}}</option>
+                      </select>
+                    </div>
                   </div>
-                  <input type="button" value="Delete" (click)="deleteCrewMember(crewMemberIndex)" />
-                
-                <input type="button" value="Add" (click)="addCrewMember()" />
-              </div>
+                  <input type="button" value="Delete" (click)="removePerson(personIndex)" />
+
+                  <input type="button" value="Add" (click)="addPerson()" />
+                </div>
               </div>
 
+              <div class="col p-3">
+                <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                </div>
+                <div [formGroup]="getCountry(movieForm)">
+                  <label for="country" style="font-size:x-large; color: crimson;"><b>Country: </b></label><br>
+                  <select class="form-control" formControlName="id">
+                    <option value="">Choose Country</option>
+                    <option *ngFor="let r of countryArray" [ngValue]="r.id">{{r.name}}</option>
+                    </select>
+                </div>
+              </div>
               <!--Roles-->
-             <!-- <div formArrayName="roles">
+              <!-- <div formArrayName="roles">
                 <label for="roleName" style="font-size:x-large; color: crimson;"><b> Role:</b></label><br>
                 <div *ngFor="let item of roles.controls; let roleIndex=index"
                   [formGroupName]="roleIndex">

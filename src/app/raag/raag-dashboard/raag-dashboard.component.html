@@ -1,0 +1,229 @@
+<div class="container_fluid" style="margin-top: 70px;">
+   <h3>Raag details</h3>
+   <div class="tab">
+      <button class="tablinks" routerLink="/raag" (click)="createRaag(raag)">Register Raag</button>
+   </div>
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <th>Name</th>
+            <th>Thaat</th>
+            <th>VarjyaSwar</th>
+            <th>Jati</th>
+            <th>VaadiSwar</th>
+            <th>SamvaadiSwar</th>
+            <th>Samay</th>
+            <th>Aaroh</th>
+            <th>Avroh</th>
+            <th>Pakad</th>
+            <th>Operation1</th>
+            <th>Operation2</th>
+            <th>Operation3</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor="let raag of raagas">
+            <td>{{raag.name}}</td>
+            <td>{{ raag.thaat}}</td>
+            <td>{{ raag.varjyaSwar}}</td>
+            <td>{{raag.jaati}}</td>
+            <td>{{raag.vaadiSwar}}</td>
+            <td>{{raag.samvaadiSwar}}</td>
+            <td>{{ raag.samay }}</td>
+            <td>{{raag.aaroh}}</td>
+            <td>{{ raag.avroh}}</td>
+            <td>{{ raag.pakad}}</td>
+            <td><button type="submit" (click)="viewRaag(raag.id)" class="btn btn-primary">View</button></td>
+            <td><button type="submit" (click)="readRaag(raag.id)" class="btn btn-primary">UPDATE</button></td>
+            <td><button type="submit" (click)="deleteRaag(raag.id)" class="btn btn-primary">DELETE</button></td>
+         </tr>
+      </tbody>
+   </table>
+
+   <div class="updateRaag" *ngIf="updateModal">
+      <div class="update-content">
+         <form>
+            <div class="form-group">
+               <label for="name" style="color:rgb(137, 47, 255);">Raag Name</label>
+               <input type="text" placeholder="Enter Raag name" class="form-control" name="name"
+                  [(ngModel)]="raag.name">
+            </div>
+            <div class="form-group">
+               <label for="thaat" style="color:rgb(137, 47, 255);">Thaat</label>
+               <input type="text" placeholder="Enter Thaat" class="form-control" name="thaat" [(ngModel)]="raag.thaat">
+            </div>
+            <div class="form-group">
+               <label for="varjyaSwar" style="color:rgb(137, 47, 255);">Varjya Swar</label>
+               <input type="text" placeholder="Enter varjyaSwar" class="form-control" name="varjyaSwar"
+                  [(ngModel)]="raag.varjyaSwar">
+            </div>
+            <div class="form-group">
+               <label for="jati" style="color:rgb(137, 47, 255);">Jati</label>
+               <input type="text" placeholder="Enter jati" class="form-control" name="jati" [(ngModel)]="raag.jaati">
+            </div>
+            <div class="form-group">
+               <label for="vaadiSwar" style="color:rgb(137, 47, 255);">vaadiSwar</label>
+               <input type="text" placeholder="Enter vaadiSwar" class="form-control" name="vaadiSwar"
+                  [(ngModel)]="raag.vaadiSwar">
+            </div>
+            <div class="form-group">
+               <label for="samvaadiSwar" style="color:rgb(137, 47, 255);">samvaadiSwar</label>
+               <input type="text" placeholder="Enter samvaadiSwar" class="form-control" name="samvaadiSwar"
+                  [(ngModel)]="raag.samvaadiSwar">
+            </div>
+
+            <div class="form-group">
+               <label for="samay" style="color:rgb(137, 47, 255);">samay</label>
+               <input type="text" placeholder="Enter samay" class="form-control" name="samay" [(ngModel)]="raag.samay">
+            </div>
+            <div class="form-group">
+               <label for="aaroh" style="color:rgb(137, 47, 255);">aaroh</label>
+               <input type="text" placeholder="Enter aaroh" class="form-control" name="aaroh" [(ngModel)]="raag.aaroh">
+            </div>
+            <div class="form-group">
+               <label for="avroh" style="color:rgb(137, 47, 255);">avroh</label>
+               <input type="text" placeholder="Enter avroh" class="form-control" name="avroh" [(ngModel)]="raag.avroh">
+            </div>
+            <div class="form-group">
+               <label for="pakad" style="color:rgb(137, 47, 255);">pakad</label>
+               <input type="text" placeholder="Enter pakad" class="form-control" name="pakad" [(ngModel)]="raag.pakad">
+            </div>
+            <div class="form-group">
+               <label for="sandarbh" style="color:rgb(137, 47, 255);">sandarbh</label>
+               <input type="text" placeholder="Enter sandarbh" class="form-control" name="sandarbh"
+                  [(ngModel)]="raag.sandarbh">
+            </div>
+            <div class="form-group">
+               <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar sthayi</label>
+               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistar"
+                  [(ngModel)]="raag.swarVistar.sthayi">
+            </div>
+            <div class="form-group">
+               <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar antara</label>
+               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistar"
+                  [(ngModel)]="raag.swarVistar.antara">
+            </div>
+            <div class="form-group">
+               <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi sthayi</label>
+               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapi"
+                  [(ngModel)]="raag.aalapi.sthayi">
+            </div>
+            <div class="form-group">
+               <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi antara</label>
+               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapi"
+                  [(ngModel)]="raag.aalapi.antara">
+            </div>
+            <div class="form-group">
+               <label for="taana" style="color:rgb(137, 47, 255);">taana sthayi</label>
+               <input type="text" placeholder="Enter taana" class="form-control" name="taana"
+                  [(ngModel)]="raag.taana.sthayi">
+            </div>
+            <div class="form-group">
+               <label for="taana" style="color:rgb(137, 47, 255);">taana antara</label>
+               <input type="text" placeholder="Enter taana" class="form-control" name="taana"
+                  [(ngModel)]="raag.taana.antara">
+            </div>
+
+         </form>
+         <div class="btn-row">
+            <button (click)="updateRaag(raag)">Update</button>
+            <button (click)="closeModal()">Cancle</button>
+         </div>
+      </div>
+   </div>
+
+   <div class="viewRaag" *ngIf="viewModal">
+      <div class="update-content">
+         <form>
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Raag Name</label>
+               <label class="form-control" name="id">{{ raag.name}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Thaat</label>
+               <label class="form-control" name="id">{{ raag.thaat}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Varjya Swar</label>
+               <label class="form-control" name="id">{{ raag.varjyaSwar}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Jaati</label>
+               <label class="form-control" name="id">{{ raag.jaati}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Vaadi Swar</label>
+               <label class="form-control" name="id">{{ raag.vaadiSwar}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Samvaadi Swar</label>
+               <label class="form-control" name="id">{{ raag.samvaadiSwar}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Samay</label>
+               <label class="form-control" name="id">{{ raag.samay}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Aaroh</label>
+               <label class="form-control" name="id">{{ raag.aaroh}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Avroh</label>
+               <label class="form-control" name="id">{{ raag.avroh}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Pakad</label>
+               <label class="form-control" name="id">{{ raag.pakad}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Sandharbh</label>
+               <label class="form-control" name="id">{{ raag.sandarbh}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Swarvistar Sthayi</label>
+               <label class="form-control" name="id">{{ raag.swarVistar.sthayi}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Swarvistar Antara</label>
+               <label class="form-control" name="id">{{ raag.swarVistar.antara}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Aalapi Sthayi</label>
+               <label class="form-control" name="id">{{ raag.aalapi.sthayi}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Aalapi Antara</label>
+               <label class="form-control" name="id">{{ raag.aalapi.antara}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Taana Sthayi</label>
+               <label class="form-control" name="id">{{ raag.taana.sthayi}}</label>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">Taana Antara</label>
+               <label class="form-control" name="id">{{ raag.taana.antara}}</label>
+            </div>
+         </form>
+         <div class="btn-row">
+            <button (click)="closeModal()">Close</button>
+         </div>
+      </div>
+   </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div class="container_fluid" style="margin-top: 70px;">
+    <h3>Company details</h3>
+    <div class="tab">
+      <button class="tablinks" routerLink="/company" (click)="createCompany(company)">Register Company</button>
+      </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>CompanyName</th>
+          <th>Operation1</th>
+          <th>Operation2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of companies">
+            <td>{{company.name}}</td>
+            <td><button type="submit" (click)="readCompany(company.id)" class="btn btn-primary">UPDATE</button></td>
+            <td><button type="submit" (click)="deleteCompany(company.id)" class="btn btn-primary">DELETE</button></td>
+          </tr>
+        </tbody>
+      </table> 
+
+      <div class="updateCompany" *ngIf="updateModal">
+        <div class="update-content">
+          <form>
+              
+              <div class="form-group">
+                  <label for="companyName" style="color:rgb(137, 47, 255);">CompanyName</label>
+                  <input type="text" placeholder="Enter CompanyName" class="form-control" name="companyName" [(ngModel)]="company.name">
+               </div>
+               
+             
+          </form>
+          <div class="btn-row">
+            <button (click)="updateCompany(company)">Update</button>
+            <button (click)="closeModal()">Cancle</button>
+          </div>
+      </div>
+      </div>
+</div>

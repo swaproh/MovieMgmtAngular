@@ -1,0 +1,242 @@
+<div>
+    <div class="container" style="margin-top: 70px;">
+        <div class="content-center">
+
+            <br><br>
+            <div class="header header-primary text-center">
+
+                <h2>Enter Raag Data</h2>
+
+            </div><br>
+            <div class="was-validated">
+                <div class="row row-cols-2 mb-1">
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus===true}">
+
+                        </div>
+                        <label for="Enter name" style="font-size: large;"><b>Enter name: </b></label><br>
+                        <input type="text" placeholder="Enter Raag name" id="name" class="form-control" name="name"
+                            [(ngModel)]="raag.name" (focus)="focus=true" (blur)="focus=false" required="true">
+
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus===true}">
+                        </div>
+                        <label for="thaat" style="font-size: large;"><b>Enter thaat: </b></label><br>
+                        <!--<input type="text" class="form-control" placeholder="Enter thaat" id="thaat" name="thaat"
+                            [(ngModel)]="raag.thaat" (focus)="focus=true" (blur)="focus=false" required="true">
+                        -->
+                            <select class="form-control" [(ngModel)]="raag.thaat">
+                            <option value="">Choose Thaat</option>
+                            <option *ngFor="let r of thaatArray" [ngValue]="r">{{r}}</option>
+                            </select>
+
+                    </div>
+
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <i class="fa fa-calendar"></i>
+                        <label for="varjyaSwar" style="font-size: large;"><b>Enter varjyaSwar: </b></label><br>
+                        <input type="text" placeholder="Enter varjyaSwar" class="form-control" id="varjyaSwar"
+                            name="varjyaSwar" [(ngModel)]="raag.varjyaSwar" (focus)="focus1=true" (blur)="focus1=false"
+                            required="true">
+
+                    </div>
+
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="jaati" style="font-size: large;"><b>Enter jati: </b></label><br>
+                        <select class="form-control" [(ngModel)]="raag.jaati">
+                            <option value="">Choose Jati</option>
+                            <option *ngFor="let r of jaatiArray" [ngValue]="r">{{r}}</option>
+                            </select>
+
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="vaadiSwar" style="font-size: large;"><b>Enter vaadiSwar: </b></label><br>
+                        <input type="text" placeholder="Enter vaadiSwar" class="form-control" (focus)="focus1=true"
+                            id="vaadiSwar" name="vaadiSwar" [(ngModel)]="raag.vaadiSwar" (blur)="focus1=false"
+                            required="true">
+
+                    </div>
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="samvaadiSwar" style="font-size: large;"><b>Enter samvaadiSwar: </b></label><br>
+                        <input type="text" placeholder="Enter samvaadiSwar" class="form-control" (focus)="focus1=true" id="samvaadiSwar"
+                            name="samvaadiSwar" [(ngModel)]="raag.samvaadiSwar" (blur)="focus1=false" required="true">
+
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="samay" style="font-size: large;"><b>Enter samay: </b></label><br>
+                        <select class="form-control" [(ngModel)]="raag.samay">
+                            <option value="">Choose Samay</option>
+                            <option *ngFor="let r of samayArray" [ngValue]="r">{{r}}</option>
+                            </select>
+
+                    </div>
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="aaroh" style="font-size: large;"><b>Enter aaroh: </b></label><br>
+                        <input type="text" placeholder="Enter aaroh" class="form-control" (focus)="focus1=true" id="aaroh"
+                            name="aaroh" [(ngModel)]="raag.aaroh" (blur)="focus1=false" required="true">
+
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="avroh" style="font-size: large;"><b>Enter avroh: </b></label><br>
+                        <input type="text" placeholder="Enter avroh" class="form-control" (focus)="focus1=true"
+                            id="avroh" name="avroh" [(ngModel)]="raag.avroh" (blur)="focus1=false"
+                            required="true">
+
+                    </div>
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="pakad" style="font-size: large;"><b>Enter pakad: </b></label><br>
+                        <input type="text" placeholder="Enter pakad" class="form-control" (focus)="focus1=true" id="pakad"
+                            name="pakad" [(ngModel)]="raag.pakad" (blur)="focus1=false" required="true">
+
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="sandarbh" style="font-size: large;"><b>Enter sandarbh: </b></label><br>
+                        <input type="text" placeholder="Enter sandarbh" class="form-control" (focus)="focus1=true"
+                            id="sandarbh" name="sandarbh" [(ngModel)]="raag.sandarbh" (blur)="focus1=false"
+                            required="true">
+
+                    </div>
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="swarVistar" style="font-size: large;"><b>Enter swarVistar sthayi: </b></label><br>
+                        <textarea placeholder="Enter swarVistar sthayi" class="form-control" (focus)="focus1=true" id="swarVistar"
+                            name="swarVistar" [(ngModel)]="raag.swarVistar.sthayi" (blur)="focus1=false" required="true">
+                        </textarea>
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="swarVistar" style="font-size: large;"><b>Enter swarVistar antara: </b></label><br>
+                        <textarea placeholder="Enter swarVistar antara" class="form-control" (focus)="focus1=true"
+                            id="swarVistar" name="swarVistar" [(ngModel)]="raag.swarVistar.antara" (blur)="focus1=false"
+                            required="true">
+                        </textarea>
+
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="aalapi" style="font-size: large;"><b>Enter aalapi sthayi: </b></label><br>
+                        <textarea placeholder="Enter aalapi sthayi" class="form-control" (focus)="focus1=true" id="aalapi"
+                            name="aalapi" [(ngModel)]="raag.aalapi.sthayi" (blur)="focus1=false" required="true">
+                        </textarea>
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="aalapi" style="font-size: large;"><b>Enter aalapi antara: </b></label><br>
+                        <textarea placeholder="Enter aalapi antara" class="form-control" (focus)="focus1=true"
+                            id="aalapi" name="aalapi" [(ngModel)]="raag.aalapi.antara" (blur)="focus1=false"
+                            required="true">
+                        </textarea>
+
+                    </div>
+                </div>
+
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="taana" style="font-size: large;"><b>Enter taana sthayi: </b></label><br>
+                        <textarea placeholder="Enter taana sthayi" class="form-control" (focus)="focus1=true" id="taana"
+                            name="taana" [(ngModel)]="raag.taana.sthayi" (blur)="focus1=false" required="true">
+                        </textarea>
+                    </div>
+
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="taana" style="font-size: large;"><b>Enter taana antara: </b></label><br>
+                        <textarea placeholder="Enter taana antara" class="form-control" (focus)="focus1=true"
+                            id="taana" name="taana" [(ngModel)]="raag.taana.antara" (blur)="focus1=false"
+                            required="true">
+                        </textarea>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            <div class="footer text-center">
+                <a routerLink="/raag" (click)="createRaag(raag)"
+                    class="btn btn-primary btn-round btn-lg btn-block">Register</a>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

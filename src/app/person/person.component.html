@@ -12,18 +12,7 @@
                   <div class="row row-cols-2 mb-1">
                   
                     
-                    <div class="col p-3">
-                      
-                      <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
-                        
-                      </div>
-
-                      <label for="Enter Person Id" style="font-size: large;"><b>Enter Person Id: </b></label><br>
-
-                        <input type="text" placeholder="Enter Person Id" id="personId"class="form-control" name="personId" [(ngModel)]="person.personId" (focus)="focus=true" (blur)="focus=false" required="true" >
-                      
-                      </div>
-                  
+                
 
                     <div class="col p-3">
                     <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
@@ -63,8 +52,10 @@
                         <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
                           </div>
                           <label for="Enter Country" style="font-size: large;"><b>Enter Country: </b></label><br> 
-                          <input type="text" placeholder="Enter Country" class="form-control" (focus)="focus1=true" id="country" name="country" [(ngModel)]="person.country"(blur)="focus1=false" required="true">
-                          
+                          <select class="form-control" [(ngModel)]="person.country">
+                            <option value="">Choose Country</option>
+                            <option *ngFor="let r of countryArray" [ngValue]="r">{{r.name}}</option>
+                            </select>
                         </div>
                     </div> 
                     

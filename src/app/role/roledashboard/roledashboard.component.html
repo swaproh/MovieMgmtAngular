@@ -6,7 +6,6 @@
     <table class="table table-hover">
         <thead>
         <tr>
-          <th>RoleId</th>
           <th>RoleName</th>
           <th>Operation1</th>
           <th>Operation2</th>
@@ -14,8 +13,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let role of roles">
-
-            <td>{{role.roleId}}</td>
             <td>{{role.roleName}}</td>
             <td><button type="submit" (click)="readRole(role.roleId)" class="btn btn-primary">UPDATE</button></td>
             <td><button type="submit" (click)="deleteRole(role.roleId)" class="btn btn-primary">DELETE</button></td>
@@ -26,10 +23,7 @@
 <div class="updateRole" *ngIf="updateModal">
   <div class="update-content">
     <form>
-        <div class="form-group">
-            <label for="RoleId" style="color:rgb(137, 47, 255);">Role Id</label>
-            <input type="text" placeholder="Enter Role Id" class="form-control" name="roleId" [(ngModel)]="role.roleId">
-        </div>
+        
         <div class="form-group">
             <label for="roleName" style="color:rgb(137, 47, 255);">RoleName</label>
             <input type="text" placeholder="Enter RoleName" class="form-control" name="roleName" [(ngModel)]="role.roleName">

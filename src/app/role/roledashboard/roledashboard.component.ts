@@ -28,11 +28,13 @@ export class RoledashboardComponent implements OnInit {
    
      updateRole(role){
       this.updateModal = false;
-        this.dataService.updateRole(this.role).subscribe(rs=>alert('Role Updated'));
+        this.dataService.updateRole(this.role).subscribe(rs=>alert('Role Updated'),
+        err=>{ alert('Exception occured')});
      }
    
      deleteRole(id){
-       this.dataService.deleteRole(id).subscribe(rs=>alert('Role Deleted'))
+       this.dataService.deleteRole(id).subscribe(rs=>alert('Role Deleted'),
+       err=>{ alert('Exception occured')})
      }
    
      readAllRole(){

@@ -28,11 +28,13 @@ export class PersondashboardComponent implements OnInit {
  
    updatePerson(person){
       this.updateModal = false;
-      this.dataService.updatePerson(this.person).subscribe(rs=>alert('Person Updated'))
+      this.dataService.updatePerson(this.person).subscribe(rs=>alert('Person Updated'),
+      err=>{ alert('Exception occured')})
    }
  
    deletePerson(id){
-     this.dataService.deletePerson(id).subscribe(rs=>alert('Person Deleted'))
+     this.dataService.deletePerson(id).subscribe(rs=>alert('Person Deleted'),
+     err=>{ alert('Exception occured')})
    }
  
    readAllPerson(){

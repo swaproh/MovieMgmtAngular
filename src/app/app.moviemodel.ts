@@ -11,4 +11,5 @@ export class MovieEntity{
     releaseDate:Date;
     watchDate:Date;
     personDTO:PersonEntity[];
+    country:Company;
 }

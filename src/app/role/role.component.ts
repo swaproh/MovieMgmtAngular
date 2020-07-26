@@ -22,7 +22,10 @@ export class RoleComponent implements OnInit {
     console.log(this.role);
     this.dataService.createRole(this.role).subscribe(rs=> {
       this.roleData = rs;
-    });
+      alert('Data Saved...')
+    },
+    err=>{ alert('Exception occured')});
+    
     this.router.navigateByUrl('roleDash');
   }
 

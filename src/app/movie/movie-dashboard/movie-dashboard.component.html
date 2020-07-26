@@ -1,85 +1,136 @@
-
 <div class="container_fluid" style="margin-top: 70px;">
-    <h3>Movie details</h3>
-    <div class="tab">
-      <button class="tablinks" routerLink="/movie" (click)="createMovie(movie)">Register Movie</button>
-      </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>MovieId</th>
-          <th>MovieName</th>
-          <th>MovieBasedOn</th>
-          <th>ProductionCompany</th>
-          <th>DistributedBy</th>
-          <th>Language</th>
-          <th>ReleaseDate</th>
-          <th>WatchDate</th>
-          <th>Operation1</th>
-          <th>Operation2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let movie of movies">
+  <h3>Movie details</h3>
+  <div class="tab">
+    <button class="tablinks" routerLink="/movie" (click)="createMovie(movie)">Register Movie</button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>MovieName</th>
+        <th>MovieBasedOn</th>
+        <th>ReleaseDate</th>
+        <th>Operation1</th>
+        <th>Operation2</th>
+        <th>Operation3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies">
+        <td>{{movie.movieName}}</td>
+        <td>{{ movie.movieBasedOn}}</td>
+        <td>{{movie.releaseDate}}</td>
+        <td><button type="submit" (click)="viewMovie(movie.movieId)" class="btn btn-primary">View</button></td>
+        <td><button type="submit" (click)="readMovie(movie.movieId)" class="btn btn-primary">UPDATE</button></td>
+        <td><button type="submit" (click)="deleteMovie(movie.movieId)" class="btn btn-primary">DELETE</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-            <td>{{ movie.movieId }}</td>
-            <td>{{movie.movieName}}</td>
-            <td>{{ movie.movieBasedOn}}</td>
-            <td>{{ movie.productionCompany}}</td>
-            <td>{{movie.distributedBy}}</td>
-            <td>{{movie.language}}</td>
-            <td>{{movie.releaseDate}}</td>
-            <td>{{movie.watchDate}}</td>
-            <td><button type="submit" (click)="readMovie(movie.movieId)" class="btn btn-primary">UPDATE</button></td>
-            <td><button type="submit" (click)="deleteMovie(movie.movieId)" class="btn btn-primary">DELETE</button></td>
-          </tr>
-        </tbody>
-      </table> 
-
-<div class="updateMovie" *ngIf="updateModal">
-  <div class="update-content">
-    <form>
+  <div class="updateMovie" *ngIf="updateModal">
+    <div class="update-content">
+      <form>
         <div class="form-group">
-            <label for="MovieId" style="color:rgb(137, 47, 255);">Movie Id</label>
-            <input type="text" placeholder="Enter Movie Id" class="form-control" name="movieId" [(ngModel)]="movie.movieId">
+          <label for="movieName" style="color:rgb(137, 47, 255);">MovieName</label>
+          <input type="text" placeholder="Enter MovieName" class="form-control" name="movieName"
+            [(ngModel)]="movie.movieName">
         </div>
         <div class="form-group">
-            <label for="movieName" style="color:rgb(137, 47, 255);">MovieName</label>
-            <input type="text" placeholder="Enter MovieName" class="form-control" name="movieName" [(ngModel)]="movie.movieName">
-         </div>
-         <div class="form-group">
-            <label for="MovieBasedOn" style="color:rgb(137, 47, 255);">MovieBasedOn</label>
-            <input type="text" placeholder="Enter MovieBasedOn" class="form-control" name="movieBasedOn" [(ngModel)]="movie.movieBasedOn">
-         </div>
-         <div class="form-group">
-            <label for="Production Company" style="color:rgb(137, 47, 255);">Production Company</label>
-            <input type="text" placeholder="Enter Production Company" class="form-control" name="productionCompany" [(ngModel)]="movie.productionCompany">
-         </div>
-         <div class="form-group">
-            <label for="DistributedBy" style="color:rgb(137, 47, 255);">DistributedBy</label>
-            <input type="text" placeholder="Enter DistributedBy" class="form-control" name="distributedBy" [(ngModel)]="movie.distributedBy">
-         </div>
-         <div class="form-group">
+          <label for="MovieBasedOn" style="color:rgb(137, 47, 255);">MovieBasedOn</label>
+          <input type="text" placeholder="Enter MovieBasedOn" class="form-control" name="movieBasedOn"
+            [(ngModel)]="movie.movieBasedOn">
+        </div>
+        <div class="form-group">
+          <label for="Production Company" style="color:rgb(137, 47, 255);">Production Company</label>
+          <input type="text" placeholder="Enter Production Company" class="form-control" name="productionCompany"
+            [(ngModel)]="movie.productionCompany">
+        </div>
+        <div class="form-group">
+          <label for="DistributedBy" style="color:rgb(137, 47, 255);">DistributedBy</label>
+          <input type="text" placeholder="Enter DistributedBy" class="form-control" name="distributedBy"
+            [(ngModel)]="movie.distributedBy">
+        </div>
+        <div class="form-group">
           <label for="Language" style="color:rgb(137, 47, 255);">Language</label>
-          <input type="text" placeholder="Enter Language" class="form-control" name="language" [(ngModel)]="movie.language">
-       </div>
-       <div class="form-group">
-        <label for="ReleaseDate" style="color:rgb(137, 47, 255);">ReleaseDate</label>
-        <input type="text" placeholder="Enter ReleaseDate" class="form-control" name="releaseDate" [(ngModel)]="movie.releaseDate">
-     </div>
-     <div class="form-group">
-      <label for="WatchDate" style="color:rgb(137, 47, 255);">WatchDate</label>
-      <input type="text" placeholder="Enter WatchDate" class="form-control" name="watchDate" [(ngModel)]="movie.watchDate">
-   </div>
-       
-    </form>
-    <div class="btn-row">
-      <button (click)="updateMovie(movie)">Update</button>
-      <button (click)="closeModal()">Cancle</button>
+          <input type="text" placeholder="Enter Language" class="form-control" name="language"
+            [(ngModel)]="movie.language">
+        </div>
+        <div class="form-group">
+          <label for="ReleaseDate" style="color:rgb(137, 47, 255);">ReleaseDate</label>
+          <input type="text" placeholder="Enter ReleaseDate" class="form-control" name="releaseDate"
+            [(ngModel)]="movie.releaseDate">
+        </div>
+        <div class="form-group">
+          <label for="WatchDate" style="color:rgb(137, 47, 255);">WatchDate</label>
+          <input type="text" placeholder="Enter WatchDate" class="form-control" name="watchDate"
+            [(ngModel)]="movie.watchDate">
+        </div>
+
+      </form>
+      <div class="btn-row">
+        <button (click)="updateMovie(movie)">Update</button>
+        <button (click)="closeModal()">Cancle</button>
+      </div>
     </div>
-</div>
-</div>
-
-</div>
+  </div>
 
 
+  <div class="viewMovie" *ngIf="viewModal">
+    <div class="update-content">
+      <form>
+        <div class="form-group">
+          <label for="movieName" style="color:rgb(137, 47, 255);">MovieName</label>
+          <label class="form-control" name="id">{{ movie.movieName}}</label>
+        </div>
+        <div class="form-group">
+          <label for="MovieBasedOn" style="color:rgb(137, 47, 255);">MovieBasedOn</label>
+          <label class="form-control" name="movieBasedOn">{{ movie.movieBasedOn}}</label>
+        </div>
+        <div class="form-group">
+          <label for="Production Company" style="color:rgb(137, 47, 255);">Production Company</label>
+          <div *ngFor="let company of movie.productionCompany;">
+            <label class="form-control" name="productionCompany">{{ company}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="DistributedBy" style="color:rgb(137, 47, 255);">DistributedBy</label>
+          <div *ngFor="let company of movie.distributedBy;">
+            <label class="form-control" name="distributedBy">{{ company.name}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Language" style="color:rgb(137, 47, 255);">Language</label>
+          <div *ngFor="let language of movie.language;">
+            <label class="form-control" name="language">{{ language.name}}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ReleaseDate" style="color:rgb(137, 47, 255);">ReleaseDate</label>
+          <input type="text" placeholder="Enter ReleaseDate" class="form-control" name="releaseDate"
+            [(ngModel)]="movie.releaseDate">
+        </div>
+        <div class="form-group">
+          <label for="WatchDate" style="color:rgb(137, 47, 255);">WatchDate</label>
+          <input type="text" placeholder="Enter WatchDate" class="form-control" name="watchDate"
+            [(ngModel)]="movie.watchDate">
+        </div>
+        <div class="form-group">
+          <label for="CrewMembers" style="color:rgb(137, 47, 255);">CrewMembers</label>
+          <div *ngFor="let person of movie.personDTO;">
+            <label class="form-control" name="CrewMembers">Name:</label>
+            <label class="form-control" name="CrewMembers">{{ person.firstName}}</label>
+
+            <div *ngFor="let role of person.roles;">
+              <label class="form-control" name="Role">Role:</label>
+              <label class="form-control" name="Role">{{ role.roleName}}</label>
+
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="btn-row">
+        <button (click)="closeModal()">Cancle</button>
+      </div>
+    </div>
+  </div>
+
+</div>
