@@ -50,7 +50,10 @@
             </div>
             <div class="form-group">
                <label for="thaat" style="color:rgb(137, 47, 255);">Thaat</label>
-               <input type="text" placeholder="Enter Thaat" class="form-control" name="thaat" [(ngModel)]="raag.thaat">
+               <select class="form-control" name="thaat" [(ngModel)]="raag.thaat">
+                  <option value="">Choose Thaat</option>
+                  <option *ngFor="let r of thaatArray" [ngValue]="r" [selected]="r===raag.thaat">{{r}}</option>
+                  </select>
             </div>
             <div class="form-group">
                <label for="varjyaSwar" style="color:rgb(137, 47, 255);">Varjya Swar</label>
@@ -59,7 +62,10 @@
             </div>
             <div class="form-group">
                <label for="jati" style="color:rgb(137, 47, 255);">Jati</label>
-               <input type="text" placeholder="Enter jati" class="form-control" name="jati" [(ngModel)]="raag.jaati">
+               <select class="form-control" name="jaati" [(ngModel)]="raag.jaati">
+                  <option value="">Choose Jati</option>
+                  <option *ngFor="let r of jaatiArray" [ngValue]="r" [selected]="r===raag.jaati">{{r}}</option>
+                  </select>
             </div>
             <div class="form-group">
                <label for="vaadiSwar" style="color:rgb(137, 47, 255);">vaadiSwar</label>
@@ -74,7 +80,10 @@
 
             <div class="form-group">
                <label for="samay" style="color:rgb(137, 47, 255);">samay</label>
-               <input type="text" placeholder="Enter samay" class="form-control" name="samay" [(ngModel)]="raag.samay">
+               <select class="form-control" name="samay" [(ngModel)]="raag.samay">
+                  <option value="">Choose Samay</option>
+                  <option *ngFor="let r of samayArray" [ngValue]="r" [selected]="r===raag.samay">{{r}}</option>
+                  </select>
             </div>
             <div class="form-group">
                <label for="aaroh" style="color:rgb(137, 47, 255);">aaroh</label>
@@ -95,32 +104,35 @@
             </div>
             <div class="form-group">
                <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar sthayi</label>
-               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistar"
+               
+               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistarsthayi"
                   [(ngModel)]="raag.swarVistar.sthayi">
+               
             </div>
             <div class="form-group">
                <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar antara</label>
-               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistar"
+              
+               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistarantara"
                   [(ngModel)]="raag.swarVistar.antara">
             </div>
             <div class="form-group">
                <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi sthayi</label>
-               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapi"
+               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapisthayi"
                   [(ngModel)]="raag.aalapi.sthayi">
             </div>
             <div class="form-group">
                <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi antara</label>
-               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapi"
+               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapiantara"
                   [(ngModel)]="raag.aalapi.antara">
             </div>
             <div class="form-group">
                <label for="taana" style="color:rgb(137, 47, 255);">taana sthayi</label>
-               <input type="text" placeholder="Enter taana" class="form-control" name="taana"
+               <input type="text" placeholder="Enter taana" class="form-control" name="taanasthayi"
                   [(ngModel)]="raag.taana.sthayi">
             </div>
             <div class="form-group">
                <label for="taana" style="color:rgb(137, 47, 255);">taana antara</label>
-               <input type="text" placeholder="Enter taana" class="form-control" name="taana"
+               <input type="text" placeholder="Enter taana" class="form-control" name="taanaantara"
                   [(ngModel)]="raag.taana.antara">
             </div>
 

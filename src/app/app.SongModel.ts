@@ -1,12 +1,12 @@
 import { MovieEntity } from './app.moviemodel';
 import { PersonEntity } from './app.personmodel';
+import { RaagEntity } from './app.RaagModel';
 
 export class SongEntity{
     id:number;
     title:string;
     movie:MovieEntity;
-    singers:PersonEntity[];
-    musicDirectors:PersonEntity[];
+    personDTO:PersonEntity[];
     lyrics:string;
-    lyricist:PersonEntity[];
+    raag: RaagEntity
 }

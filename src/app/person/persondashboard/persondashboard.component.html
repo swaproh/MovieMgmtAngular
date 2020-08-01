@@ -1,59 +1,102 @@
 <div class="container" style="margin-top: 70px;">
-    <h3>Person details</h3>
-    <div class="tab">
-      <button class="tablinks" routerLink="/person" (click)="createPerson(person)">Register Person</button>
-      </div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>FirstName</th>
-          <th>LastName</th>
-          <th>Date of Birth</th>
-          <th>Country</th>
-          <th>Operation1</th>
-          <th>Operation2</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let person of persons">
-            <td>{{person.firstName}}</td>
-            <td>{{person.lastName}}</td>
-            <td>{{person.dob}}</td>
-            <td>{{person.country.name}}</td>
-            <td><button type="submit" (click)="readPerson(person.personId)" class="btn btn-primary">UPDATE</button></td>
-            <td><button type="submit" (click)="deletePerson(person.personId)" class="btn btn-primary">DELETE</button></td>
-          </tr>
-        </tbody>
-      </table> 
+  <h3>Person details</h3>
+  <div class="tab">
+    <button class="tablinks" routerLink="/person" (click)="createPerson(person)">Register Person</button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Date of Birth</th>
+        <th>Country</th>
+        <th>Operation1</th>
+        <th>Operation2</th>
+        <th>Operation3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{person.firstName}}</td>
+        <td>{{person.lastName}}</td>
+        <td>{{person.dob}}</td>
+        <td>{{person.country.name}}</td>
+        <td><button type="submit" (click)="viewPerson(person.personId)" class="btn btn-primary">VIEW</button></td>
+        <td><button type="submit" (click)="readPerson(person.personId)" class="btn btn-primary">UPDATE</button></td>
+        <td><button type="submit" (click)="deletePerson(person.personId)" class="btn btn-primary">DELETE</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="updatePerson" *ngIf="updateModal">
-  <div class="update-content">
-    <form>
+  <div class="updatePerson" *ngIf="updateModal">
+    <div class="update-content">
+      <form>
         <div class="form-group">
-            <label for="FirstName" style="color:rgb(137, 47, 255);">FirstName</label>
-            <input type="text" placeholder="Enter FirstName" class="form-control" name="firstName" [(ngModel)]="person.firstName">
-         </div>
-         <div class="form-group">
-            <label for="LastName" style="color:rgb(137, 47, 255);">LastName</label>
-            <input type="text" placeholder="Enter LastName" class="form-control" name="lastName" [(ngModel)]="person.lastName">
-         </div>
-         <div class="form-group">
-            <label for="Date of Birth" style="color:rgb(137, 47, 255);">Date of Birth</label>
-            <input type="text" placeholder="Enter Date of Birth" class="form-control" name="dob" [(ngModel)]="person.dob">
-         </div>
-         <div class="form-group">
-            <label for="Country" style="color:rgb(137, 47, 255);">Country</label>
-            <input type="text" placeholder="Enter Country" class="form-control" name="country" [(ngModel)]="person.country">
-         </div>
-         
-       
-    </form>
-    <div class="btn-row">
-      <button (click)="updatePerson(person)">Update</button>
-      <button (click)="closeModal()">Cancle</button>
+          <label for="firstName" style="color:rgb(137, 47, 255);">FirstName</label>
+          <input type="text" placeholder="Enter FirstName" class="form-control" name="firstName"
+            [(ngModel)]="person.firstName">
+        </div>
+        <div class="form-group">
+          <label for="LastName" style="color:rgb(137, 47, 255);">LastName</label>
+          <input type="text" placeholder="Enter LastName" class="form-control" name="lastName"
+            [(ngModel)]="person.lastName">
+        </div>
+        <div class="form-group">
+          <label for="Date of Birth" style="color:rgb(137, 47, 255);">Date of Birth</label>
+          <input type="date" placeholder="Enter Date of Birth" class="form-control" name="dob" [(ngModel)]="person.dob">
+        </div>
+        <div class="form-group">
+          <label for="country" style="color:rgb(137, 47, 255);">Country</label>
+
+          <div *ngIf="person.country != null">
+            <select class="form-control dropdown-item fontstyle" name="country" [(ngModel)]="person.country.id">
+              <option value="">Choose Country</option>
+              <option *ngFor="let r of countryArray" [ngValue]="r.id" [selected]="r.name===person.country.name">
+                {{r.name}}</option>
+            </select>
+          </div>
+        </div>
+
+
+      </form>
+      <div class="btn-row">
+        <button (click)="updatePerson(person)">Update</button>
+        <button (click)="closeModal()">Cancle</button>
+      </div>
     </div>
-</div>
-</div>
+  </div>
+
+  <div class="viewPerson" *ngIf="viewModal">
+    <div class="update-content">
+      <form>
+        <div class="form-group">
+          <label for="firstName" style="color:rgb(137, 47, 255);">FirstName</label>
+          <label class="form-control" name="firstName"
+            [(ngModel)]="person.firstName" ngDefaultControl>{{person.firstName}}</label>
+        </div>
+        <div class="form-group">
+          <label for="LastName" style="color:rgb(137, 47, 255);">LastName</label>
+          <label class="form-control" name="lastName"
+            [(ngModel)]="person.lastName" ngDefaultControl >{{person.lastName}}</label>
+        </div>
+        <div class="form-group">
+          <label for="Date of Birth" style="color:rgb(137, 47, 255);">Date of Birth</label>
+          <label class="form-control" name="dob" [(ngModel)]="person.dob" ngDefaultControl >{{person.dob}}</label>
+        </div>
+        <div class="form-group">
+          <label for="country" style="color:rgb(137, 47, 255);">Country</label>
+
+          <div *ngIf="person.country != null">
+            <label class="form-control" name="country" [(ngModel)]="person.country.name" ngDefaultControl >{{person.country.name}}</label>
+          </div>
+        </div>
+
+
+      </form>
+      <div class="btn-row">
+        <button (click)="closeModal()">Cancle</button>
+      </div>
+    </div>
+  </div>
 
 </div>
-

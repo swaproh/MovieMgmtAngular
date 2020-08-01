@@ -28,41 +28,161 @@
 
   <div class="updateMovie" *ngIf="updateModal">
     <div class="update-content">
-      <form>
-        <div class="form-group">
-          <label for="movieName" style="color:rgb(137, 47, 255);">MovieName</label>
-          <input type="text" placeholder="Enter MovieName" class="form-control" name="movieName"
-            [(ngModel)]="movie.movieName">
+      <form [formGroup]="movieForm">
+
+        <div class="row row-cols-2 mb-1">
+
+
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+            </div>
+            <label for="movieName" style="font-size:x-large; color: crimson;"><b>MovieName: </b></label><br>
+
+            <input type="text" formControlName="movieName" placeholder="Enter movieName" id="movieName"
+              class="form-control" name="movieName" (focus)="focus=true" (blur)="focus=false" required="true">
+          </div>
         </div>
-        <div class="form-group">
-          <label for="MovieBasedOn" style="color:rgb(137, 47, 255);">MovieBasedOn</label>
-          <input type="text" placeholder="Enter MovieBasedOn" class="form-control" name="movieBasedOn"
-            [(ngModel)]="movie.movieBasedOn">
+
+        <div class="row row-cols-2 mb-1">
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+            </div>
+            <label for="movieBasedOn" style="font-size:x-large; color: crimson;"><b>MovieBasedOn: </b></label><br>
+
+            <input type="text" formControlName="movieBasedOn" placeholder="Enter movieBasedOn" id="movieBasedOn"
+              class="form-control" name="movieBasedOn" (focus)="focus=true" (blur)="focus=false" required="true">
+          </div>
+
+
+          <div formArrayName="productionCompany">
+            <label for="productionCompany" style="font-size:x-large; color: crimson;"><b> Production
+                Company:</b></label><br>
+            <div *ngFor="let comp of getProductionCompany(movieForm); let nameIndex=index" [formGroupName]="nameIndex">
+              <select class="form-control" formControlName="id">
+                <option value="">Choose Production Company</option>
+                <option *ngFor="let r of companyArray" [ngValue]="r.id">{{r.name}}</option>
+              </select>
+              <input type="button" value="Delete" (click)="removeProdCompany(nameIndex)" />
+
+              <input type="button" value="Add" (click)="addProdCompany()" />
+            </div>
+          </div>
+
         </div>
-        <div class="form-group">
-          <label for="Production Company" style="color:rgb(137, 47, 255);">Production Company</label>
-          <input type="text" placeholder="Enter Production Company" class="form-control" name="productionCompany"
-            [(ngModel)]="movie.productionCompany">
+
+
+        <div class="row row-cols-2 mb-1">
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <div formArrayName="distributedBy">
+              <label for="distributedBy" style="font-size:x-large; color: crimson;"><b> Distribute
+                  Company:</b></label><br>
+              <div *ngFor="let comp of getDistributedBy(movieForm); let nameIndex=index" [formGroupName]="nameIndex">
+
+                <select class="form-control" formControlName="id">
+                  <option value="">Choose Distribution Company</option>
+                  <option *ngFor="let r of companyArray" [ngValue]="r.id">{{r.name}}</option>
+                </select>
+                <input type="button" value="Delete" (click)="removeDistributedBy(nameIndex)" />
+
+                <input type="button" value="Add" (click)="addDistCompany()" />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <div formArrayName="language">
+              <label for="language" style="font-size:x-large; color: crimson;"><b> Language:</b></label><br>
+              <div *ngFor="let lang of getLanguage(movieForm); let nameIndex=index" [formGroupName]="nameIndex">
+
+                <select class="form-control" formControlName="id">
+                  <option value="">Choose Language</option>
+                  <option *ngFor="let r of languageArray" [ngValue]="r.id">{{r.name}}</option>
+                </select>
+                <input type="button" value="Delete" (click)="removeLanguage(nameIndex)" />
+
+                <input type="button" value="Add" (click)="addLanguage()" />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <div formArrayName="personDTO">
+              <label for="crewMemberL" style="font-size:x-large; color: crimson;"><b> Member
+                  Name:</b></label>
+              <div *ngFor="let person of getPersonDTO(movieForm); let personIndex=index" [formGroupName]="personIndex">
+
+                <select class="form-control" formControlName="personId">
+                  <option value="">Choose Crew</option>
+                  <option *ngFor="let r of PersonArray" [ngValue]="r.personId">
+                    {{r.firstName+' '+r.lastName}}</option>
+                </select>
+
+                <div formArrayName="roles">
+                  <div *ngFor="let role of getRoles(person); let roleDTOIndex=index" [formGroupName]="roleDTOIndex">
+                    <select class="form-control" formControlName="roleId">
+                      <option value="">Choose Role</option>
+                      <option *ngFor="let r of RolesArray" [ngValue]="r.roleId">{{r.roleName}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <input type="button" value="Delete" (click)="removePerson(personIndex)" />
+
+                <input type="button" value="Add" (click)="addPerson()" />
+              </div>
+            </div>
+
+            <div class="col p-3">
+              <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+              </div>
+              <div [formGroup]="getCountry(movieForm)">
+                
+                <label for="country" style="font-size:x-large; color: crimson;"><b>Country: </b></label><br>
+                <div *ngIf="movie.country != null">
+                  <select class="form-control" formControlName="id">
+                    <option value="">Choose Country</option>
+                    <option *ngFor="let r of countryArray" [ngValue]="r.id" [selected]="r.name===movie.country.name">
+                      {{r.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
-        <div class="form-group">
-          <label for="DistributedBy" style="color:rgb(137, 47, 255);">DistributedBy</label>
-          <input type="text" placeholder="Enter DistributedBy" class="form-control" name="distributedBy"
-            [(ngModel)]="movie.distributedBy">
-        </div>
-        <div class="form-group">
-          <label for="Language" style="color:rgb(137, 47, 255);">Language</label>
-          <input type="text" placeholder="Enter Language" class="form-control" name="language"
-            [(ngModel)]="movie.language">
-        </div>
-        <div class="form-group">
-          <label for="ReleaseDate" style="color:rgb(137, 47, 255);">ReleaseDate</label>
-          <input type="text" placeholder="Enter ReleaseDate" class="form-control" name="releaseDate"
-            [(ngModel)]="movie.releaseDate">
-        </div>
-        <div class="form-group">
-          <label for="WatchDate" style="color:rgb(137, 47, 255);">WatchDate</label>
-          <input type="text" placeholder="Enter WatchDate" class="form-control" name="watchDate"
-            [(ngModel)]="movie.watchDate">
+
+        <div class="row row-cols-2 mb-4">
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <i class="fa fa-calendar"></i>
+            <label for="Release Date" style="font-size:x-large; color: crimson;"><b>Release Date: </b></label><br>
+            <input type="date" formControlName="releaseDate" placeholder="Enter Release Date" class="form-control"
+              (focus)="focus1=true" id="releaseDate" name="releaseDate" (focus)="focus1=true" (blur)="focus1=false"
+              required="true">
+
+
+          </div>
+
+          <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <i class="fa fa-calendar"></i>
+            <label for="Watch Date" style="font-size:x-large; color: crimson;"><b>Watch Date: </b></label><br>
+            <input type="date" formControlName="watchDate" placeholder="Enter Watch Date" class="form-control"
+              id="watchDate" name="watchDate" (focus)="focus1=true" (blur)="focus1=false" required="true">
+
+          </div>
+
         </div>
 
       </form>
@@ -88,7 +208,7 @@
         <div class="form-group">
           <label for="Production Company" style="color:rgb(137, 47, 255);">Production Company</label>
           <div *ngFor="let company of movie.productionCompany;">
-            <label class="form-control" name="productionCompany">{{ company}}</label>
+            <label class="form-control" name="productionCompany">{{ company.name}}</label>
           </div>
         </div>
         <div class="form-group">
@@ -125,6 +245,12 @@
 
             </div>
           </div>
+        </div>
+        <div class="form-group">
+          <label for="country" style="color:rgb(137, 47, 255);">country:</label>
+          <div *ngIf="movie.country != null">
+          <label class="form-control" name="country">{{ movie.country.name}}</label>
+        </div>
         </div>
       </form>
       <div class="btn-row">

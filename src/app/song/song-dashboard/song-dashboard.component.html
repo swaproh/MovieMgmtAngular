@@ -34,39 +34,107 @@
 
   <div class="updateSong" *ngIf="updateModal">
     <div class="update-content">
-      <form>
+      <form [formGroup]="songForm">
 
-        <div class="form-group">
-          <label for="songName" style="color:rgb(137, 47, 255);">Song Name</label>
-          <input type="text" placeholder="Enter SongName" class="form-control" name="songName" [(ngModel)]="song.title">
+        <div class="row row-cols-2 mb-1">
+
+
+            <div class="col p-3">
+                <div class="input-group form-group-no-border input-lg"
+                    [ngClass]="{'input-group-focus':focus===true}">
+                </div>
+                <label for="name" style="font-size:x-large; color: crimson;"><b>Title:
+                    </b></label><br>
+                <input type="text" formControlName="title" placeholder="Enter Song name" id="name"
+                    class="form-control" name="name" (focus)="focus=true" (blur)="focus=false"
+                    required="true">
+
+            </div>
+
+            <div class="col p-3">
+                <div class="input-group form-group-no-border input-lg"
+                    [ngClass]="{'input-group-focus':focus===true}">
+                </div>
+                
+                <div [formGroup]="getRaag(songForm)">
+                    <label style="font-size:x-large; color: crimson;"><b>Raag:
+                    </b></label><br>
+                    <select class="form-control" formControlName="id">
+                        <option value="">Choose Raag</option>
+                        <option *ngFor="let r of raagArray" [ngValue]="r.id">{{r.name}}</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-          <label for="raag" style="color:rgb(137, 47, 255);">raag</label>
-          
-            <select class="form-control" name="raag" [(ngModel)]="song.raag.id">
-              <option value="">Choose Raag</option>
-              <option *ngFor="let r of raagArray" [ngValue]="r.id" [selected]="r.name===song.raag.name">{{r.name}}</option>
-          </select>
+
+        <div class="row row-cols-2 mb-1">
+            <div class="col p-3">
+                <div class="input-group form-group-no-border input-lg"
+                    [ngClass]="{'input-group-focus':focus===true}">
+                </div>
+                
+                <div [formGroup]="getMovie(songForm)">
+                    <label style="font-size:x-large; color: crimson;"><b>movie:
+                    </b></label><br>
+                    
+                    <select class="form-control" formControlName="movieId">
+                        <option value="">Choose Movie</option>
+                        <option *ngFor="let r of movieArray" [ngValue]="r.movieId" [selected]="song.movie!=null ? r.movieId===song.movie.movieId : ''">{{r.movieName}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="col p-3">
+                <div class="input-group form-group-no-border input-lg"
+                    [ngClass]="{'input-group-focus':focus===true}">
+                </div>
+                <label for="lyrics" style="font-size:x-large; color: crimson;"><b>lyrics:
+                    </b></label><br>
+                <input type="text" formControlName="lyrics" placeholder="Enter lyrics" id="lyrics"
+                    class="form-control" name="lyrics" (focus)="focus=true" (blur)="focus=false"
+                    required="true">
+
+            </div>
+
         </div>
 
-        <div class="form-group">
-          <label for="movie" style="color:rgb(137, 47, 255);">movie</label>
-          
-            <select class="form-control" name="movie" [(ngModel)]="song.movie.movieId">
-              <option value="">Choose Movie</option>
-              <option *ngFor="let r of movieArray" [ngValue]="r.movieId" [selected]="r.movieName===song.movie.movieName">{{r.movieName}}</option>
-          </select>
+
+        <div class="col p-3">
+            <div class="input-group form-group-no-border input-lg"
+                [ngClass]="{'input-group-focus':focus1===true}">
+            </div>
+            <div formArrayName="personDTO">
+                <label for="crewMemberL" style="font-size:x-large; color: crimson;"><b> Member
+                        Name:</b></label>
+                <div *ngFor="let person of getPersonDTO(songForm); let personIndex=index"
+                    [formGroupName]="personIndex">
+
+                    <select class="form-control" formControlName="personId">
+                        <option value="">Choose Crew</option>
+                        <option *ngFor="let r of PersonArray" [ngValue]="r.personId">
+                            {{r.firstName+' '+r.lastName}}</option>
+                    </select>
+
+                    <div formArrayName="roles">
+                        <div *ngFor="let role of getRoleDTO(person); let roleDTOIndex=index"
+                            [formGroupName]="roleDTOIndex">
+                            <select class="form-control" formControlName="roleId">
+                                <option value="">Choose Role</option>
+                                <option *ngFor="let r of RolesArray" [ngValue]="r.roleId">{{r.roleName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="button" value="Delete" (click)="removePerson(personIndex)" />
+
+                    <input type="button" value="Add" (click)="addPerson()" />
+                </div>
+            </div>
+
         </div>
-
-        <div class="form-group">
-          <label for="lyrics" style="color:rgb(137, 47, 255);">Lyrics</label>
-          <input type="text" placeholder="Enter Lyrics" class="form-control" name="lyrics" [(ngModel)]="song.lyrics">
-        </div>
-
-
-
-      </form>
+    </form>
       <div class="btn-row">
         <button (click)="updateSong(song)">Update</button>
         <button (click)="closeModal()">Cancle</button>

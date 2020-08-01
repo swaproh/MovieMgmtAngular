@@ -16,7 +16,8 @@ export class PersondashboardComponent implements OnInit {
   all : boolean= true;
   read : boolean= false;
   updateModal: any = false;
-
+  viewModal: any = false;
+  countryArray: any = ['test'];
   constructor(private dataService:DataService  ,  private router: Router,
     private activatedrouter: ActivatedRoute) { }
 
@@ -24,8 +25,12 @@ export class PersondashboardComponent implements OnInit {
     // this.dataService.readMovie(this.id).subscribe(rs=>{this.movie=rs})
      //console.log(this.movie);
      this.dataService.readAllPerson().subscribe((rs: any[] ) => {this.persons = rs});
+     // for update operation
+     this.dataService.readAllCountries().subscribe((rs: any[]) => { this.countryArray = rs });
    }
  
+   
+
    updatePerson(person){
       this.updateModal = false;
       this.dataService.updatePerson(this.person).subscribe(rs=>alert('Person Updated'),
@@ -55,6 +60,12 @@ export class PersondashboardComponent implements OnInit {
  
    closeModal(){
      this.updateModal = false;
+     this.viewModal = false;
    }
+
+   viewPerson(id){
+    this.viewModal = true;
+    this.dataService.readPerson(id).subscribe(rs=>{this.person=rs,console.log(this.person);});
+  }
 
 }

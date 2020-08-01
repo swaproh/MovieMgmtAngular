@@ -37,7 +37,7 @@ export class DataService {
 
   updateMovie(movie){
     
-    alert('hello='+movie.movieName+' '+movie.language+' '+movie.movieBasedOn)
+    //alert('hello='+movie.movieName+' '+movie.language+' '+movie.movieBasedOn)
     return this.http.put(this.url+'/movie'+'/update',movie)
   }
 
