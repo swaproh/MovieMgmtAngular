@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SongEntity } from 'src/app/app.SongModel';
 import { DataService } from 'src/app/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ConstantPool } from '@angular/compiler';
 import { MovieEntity } from 'src/app/app.moviemodel';
+import { SwiperComponent } from 'ngx-useful-swiper';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-song-dashboard',
@@ -12,7 +14,7 @@ import { MovieEntity } from 'src/app/app.moviemodel';
   styleUrls: ['./song-dashboard.component.css']
 })
 export class SongDashboardComponent implements OnInit {
-
+  @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
   song: SongEntity=new SongEntity();
   songs:SongEntity[];
   id: number = this.activatedrouter.snapshot.params['id'];
@@ -28,18 +30,98 @@ export class SongDashboardComponent implements OnInit {
    movieArray: any = ['test']
    raagArray: any = ['test']
    songForm: FormGroup;
+   pageNumber: number = 0;
+  pageSize: number = 5;
+  config: SwiperOptions = {
+    pagination: { el: '.swiper-pagination', clickable: true },
+    autoHeight: true,
+    allowTouchMove: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: true
+    },
+    speed: 400,
+    spaceBetween: 100,
+    breakpoints: {
+      1024: {
+        slidesPerView: this.pageSize
+      },
+      500: {
+        slidesPerView: 3
+      },
+      400: {
+        slidesPerView: 2
+      },
+      300: {
+        slidesPerView: 1
+      }
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    loop: true,
+    on: {
+      click: () =>{
+        const ind = this.usefulSwiper.swiper.clickedIndex;
+        //alert(ind+' '+this.movies[ind].movieName);
+        this.viewSong(this.songs[ind].id);
+      },
+      slideChange: () => {
+       // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
+       //alert(this.pageNumber);
+      },
+      slideChangeTransitionEnd: () => {
+        //console.log('slideChange Event');
+        //alert('slideChange')
+      },
+      slideNextTransitionStart: () => {
+       // alert('next');
+       
+      },
+      slidePrevTransitionStart: () => {
+        //alert('prev');
+       
+      }
+    }
+  };
+
   constructor(private dataService:DataService  ,  private router: Router,
     private activatedrouter: ActivatedRoute) { 
     
   }
 
+  nextSlide() {
+    this.pageNumber=this.pageNumber+1;
+    // for list all operation
+    this.readAllSongs(this.pageNumber, this.pageSize);
+    this.usefulSwiper.swiper.slideNext();
+  }
+
+  previousSlide() {
+    this.pageNumber=this.pageNumber-1;
+    if(this.pageNumber<0){
+      this.pageNumber = 0;
+    }
+    // for list all operation
+    this.readAllSongs(this.pageNumber, this.pageSize);
+    this.usefulSwiper.swiper.slidePrev();
+  }
+  slideToThis(index) {
+    this.usefulSwiper.swiper.slideTo(index);
+  }
+
   ngOnInit() {
-    this.readAllSongs();
+    if(!window.localStorage.getItem('token')) {
+      this.router.navigate(['login']);
+      return;
+    }
+    this.readAllSongs(this.pageNumber, this.pageSize);
     // for update operation
     this.dataService.readAllRole().subscribe((rs: any[]) => { this.RolesArray = rs });
-    this.dataService.readAllPerson().subscribe((rs: any[]) => { this.PersonArray = rs })
-    this.dataService.readAllMovie().subscribe((rs: any[]) => { this.movieArray = rs })
-    this.dataService.readAllRaagas().subscribe((rs: any[]) => {this.raagArray = rs });
+    this.dataService.readAllPerson(0,5).subscribe((rs: any[]) => { this.PersonArray = rs })
+    this.dataService.readAllMovie(0,5).subscribe((rs: any[]) => { this.movieArray = rs })
+    this.dataService.readAllRaagas(0,5).subscribe((rs: any[]) => {this.raagArray = rs });
     this.songForm = new FormGroup(
       {
         id: new FormControl(''),
@@ -168,14 +250,15 @@ export class SongDashboardComponent implements OnInit {
     err=>{ alert('Exception occured')})
   }
 
-  readAllSongs(){
+  readAllSongs(pn, ps){
     
-    this.dataService.readAllSongs().subscribe((rs: any[] ) => {this.songs = rs; console.log(this.songs);})
+    this.dataService.readAllSongs(pn, ps).subscribe((rs: any[] ) => {this.songs = rs; console.log(this.songs);})
   }
 
   readSong(id){
     // alert('hii')
     this.updateModal = true;
+    this.viewModal = false;
     this.all=false;
     this.read=true;
     this.dataService.readSong(id).subscribe(

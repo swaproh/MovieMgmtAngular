@@ -34,7 +34,7 @@ export class MovieComponent implements OnInit {
   ngOnInit() {
     
     this.dataService.readAllRole().subscribe((rs: any[]) => { this.RolesArray = rs });
-    this.dataService.readAllPerson().subscribe((rs: any[]) => { this.PersonArray = rs })
+    this.dataService.readAllPerson(0,5).subscribe((rs: any[]) => { this.PersonArray = rs })
     this.dataService.readAllCompanies().subscribe((rs: any[]) => { this.companyArray = rs });
     this.dataService.readAllLanguages().subscribe((rs: any[]) => { this.languageArray = rs });
     this.dataService.readAllCountries().subscribe((rs: any[]) => { this.countryArray = rs });

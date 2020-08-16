@@ -3,6 +3,7 @@
    <div class="tab">
       <button class="tablinks" routerLink="/raag" (click)="createRaag(raag)">Register Raag</button>
    </div>
+   <!--
    <table class="table table-hover">
       <thead>
          <tr>
@@ -39,7 +40,7 @@
          </tr>
       </tbody>
    </table>
-
+-->
    <div class="updateRaag" *ngIf="updateModal">
       <div class="update-content">
          <form>
@@ -95,45 +96,58 @@
             </div>
             <div class="form-group">
                <label for="pakad" style="color:rgb(137, 47, 255);">pakad</label>
-               <input type="text" placeholder="Enter pakad" class="form-control" name="pakad" [(ngModel)]="raag.pakad">
-            </div>
+               <textarea placeholder="Enter pakad" class="form-control" name="pakad" [(ngModel)]="raag.pakad">
+                  </textarea>
+               </div>
             <div class="form-group">
                <label for="sandarbh" style="color:rgb(137, 47, 255);">sandarbh</label>
-               <input type="text" placeholder="Enter sandarbh" class="form-control" name="sandarbh"
+               <textarea placeholder="Enter sandarbh" class="form-control" name="sandarbh"
                   [(ngModel)]="raag.sandarbh">
+                  </textarea>
+            </div>
+            <div class="form-group">
+               <label for="sandarbh" style="color:rgb(137, 47, 255);">Gat</label>
+               <textarea class="form-control" name="gat"
+                  [(ngModel)]="raag.gat">
+                  </textarea>
             </div>
             <div class="form-group">
                <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar sthayi</label>
                
-               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistarsthayi"
+               <textarea placeholder="Enter swarVistar" class="form-control" name="swarVistarsthayi"
                   [(ngModel)]="raag.swarVistar.sthayi">
-               
+               </textarea>
             </div>
             <div class="form-group">
                <label for="swarVistar" style="color:rgb(137, 47, 255);">swarVistar antara</label>
               
-               <input type="text" placeholder="Enter swarVistar" class="form-control" name="swarVistarantara"
+               <textarea placeholder="Enter swarVistar" class="form-control" name="swarVistarantara"
                   [(ngModel)]="raag.swarVistar.antara">
+                  </textarea>
             </div>
             <div class="form-group">
                <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi sthayi</label>
-               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapisthayi"
+               <textarea placeholder="Enter aalapi" class="form-control" name="aalapisthayi"
                   [(ngModel)]="raag.aalapi.sthayi">
+                  </textarea>
             </div>
             <div class="form-group">
                <label for="aalapi" style="color:rgb(137, 47, 255);">aalapi antara</label>
-               <input type="text" placeholder="Enter aalapi" class="form-control" name="aalapiantara"
+               <textarea placeholder="Enter aalapi" class="form-control" name="aalapiantara"
                   [(ngModel)]="raag.aalapi.antara">
+                  </textarea>
             </div>
             <div class="form-group">
                <label for="taana" style="color:rgb(137, 47, 255);">taana sthayi</label>
-               <input type="text" placeholder="Enter taana" class="form-control" name="taanasthayi"
+               <textarea placeholder="Enter taana" class="form-control" name="taanasthayi"
                   [(ngModel)]="raag.taana.sthayi">
+                  </textarea>
             </div>
             <div class="form-group">
                <label for="taana" style="color:rgb(137, 47, 255);">taana antara</label>
-               <input type="text" placeholder="Enter taana" class="form-control" name="taanaantara"
+               <textarea placeholder="Enter taana" class="form-control" name="taanaantara"
                   [(ngModel)]="raag.taana.antara">
+                  </textarea>
             </div>
 
          </form>
@@ -149,93 +163,119 @@
          <form>
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Raag Name</label>
-               <label class="form-control" name="id">{{ raag.name}}</label>
+               <label class="form-control" name="name">{{ raag.name}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Thaat</label>
-               <label class="form-control" name="id">{{ raag.thaat}}</label>
+               <label class="form-control" name="thaat">{{ raag.thaat}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Varjya Swar</label>
-               <label class="form-control" name="id">{{ raag.varjyaSwar}}</label>
+               <label class="form-control" name="varjyaSwar">{{ raag.varjyaSwar}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Jaati</label>
-               <label class="form-control" name="id">{{ raag.jaati}}</label>
+               <label class="form-control" name="jaati">{{ raag.jaati}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Vaadi Swar</label>
-               <label class="form-control" name="id">{{ raag.vaadiSwar}}</label>
+               <label class="form-control" name="vaadiSwar">{{ raag.vaadiSwar}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Samvaadi Swar</label>
-               <label class="form-control" name="id">{{ raag.samvaadiSwar}}</label>
+               <label class="form-control" name="samvaadiSwar">{{ raag.samvaadiSwar}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Samay</label>
-               <label class="form-control" name="id">{{ raag.samay}}</label>
+               <label class="form-control" name="samay">{{ raag.samay}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Aaroh</label>
-               <label class="form-control" name="id">{{ raag.aaroh}}</label>
+               <label class="form-control" name="aaroh">{{ raag.aaroh}}</label>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Avroh</label>
-               <label class="form-control" name="id">{{ raag.avroh}}</label>
+               <label class="form-control" name="avroh">{{ raag.avroh}}</label>
             </div>
 
             <div class="form-group">
-               <label for="id" style="color:rgb(137, 47, 255);">Pakad</label>
-               <label class="form-control" name="id">{{ raag.pakad}}</label>
+               <label for="id" style="color:#892fff;">Pakad</label>
+               <textarea class="form-control" name="pakad" readonly>{{ raag.pakad}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Sandharbh</label>
-               <label class="form-control" name="id">{{ raag.sandarbh}}</label>
+               <textarea class="form-control" name="sandarbh" readonly>{{ raag.sandarbh}}</textarea>
+            </div>
+
+            <div class="form-group">
+               <label for="id" style="color:rgb(137, 47, 255);">gat</label>
+               <textarea class="form-control" name="gat" readonly>{{ raag.gat}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Swarvistar Sthayi</label>
-               <label class="form-control" name="id">{{ raag.swarVistar.sthayi}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.swarVistar.sthayi}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Swarvistar Antara</label>
-               <label class="form-control" name="id">{{ raag.swarVistar.antara}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.swarVistar.antara}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Aalapi Sthayi</label>
-               <label class="form-control" name="id">{{ raag.aalapi.sthayi}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.aalapi.sthayi}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Aalapi Antara</label>
-               <label class="form-control" name="id">{{ raag.aalapi.antara}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.aalapi.antara}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Taana Sthayi</label>
-               <label class="form-control" name="id">{{ raag.taana.sthayi}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.taana.sthayi}}</textarea>
             </div>
 
             <div class="form-group">
                <label for="id" style="color:rgb(137, 47, 255);">Taana Antara</label>
-               <label class="form-control" name="id">{{ raag.taana.antara}}</label>
+               <textarea class="form-control" name="id" readonly>{{ raag.taana.antara}}</textarea>
             </div>
          </form>
          <div class="btn-row">
             <button (click)="closeModal()">Close</button>
+            <button (click)="deleteRaag(raag.id)" class="btn btn-primary">DELETE</button>
+        <button (click)="readRaag(raag.id)">Update</button>
          </div>
       </div>
    </div>
 
 </div>
+
+<swiper [config]="config" #usefulSwiper>
+
+   <div class="swiper-wrapper">
+ 
+     <div class="swiper-slide" *ngFor="let slide of raagas">
+       <img src="assets/image/2.jpg" width="100" height="100" /><br>
+       {{slide.name}}
+     </div>
+ 
+   </div>
+ 
+   <!-- Add Pagination -->
+   <div class="swiper-pagination"></div>
+ 
+   <!-- Add Arrows -->
+   <div class="swiper-button-next" (click)="nextSlide()"></div>
+   <div class="swiper-button-prev" (click)="previousSlide()"></div>
+ </swiper>

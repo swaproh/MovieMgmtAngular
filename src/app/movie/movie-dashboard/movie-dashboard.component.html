@@ -3,6 +3,7 @@
   <div class="tab">
     <button class="tablinks" routerLink="/movie" (click)="createMovie(movie)">Register Movie</button>
   </div>
+<!--
   <table class="table table-hover">
     <thead>
       <tr>
@@ -24,8 +25,8 @@
         <td><button type="submit" (click)="deleteMovie(movie.movieId)" class="btn btn-primary">DELETE</button></td>
       </tr>
     </tbody>
-  </table>
-
+  </table> 
+-->
   <div class="updateMovie" *ngIf="updateModal">
     <div class="update-content">
       <form [formGroup]="movieForm">
@@ -144,7 +145,7 @@
               <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
               </div>
               <div [formGroup]="getCountry(movieForm)">
-                
+
                 <label for="country" style="font-size:x-large; color: crimson;"><b>Country: </b></label><br>
                 <div *ngIf="movie.country != null">
                   <select class="form-control" formControlName="id">
@@ -249,14 +250,34 @@
         <div class="form-group">
           <label for="country" style="color:rgb(137, 47, 255);">country:</label>
           <div *ngIf="movie.country != null">
-          <label class="form-control" name="country">{{ movie.country.name}}</label>
-        </div>
+            <label class="form-control" name="country">{{ movie.country.name}}</label>
+          </div>
         </div>
       </form>
       <div class="btn-row">
         <button (click)="closeModal()">Cancle</button>
+        <button (click)="deleteMovie(movie.movieId)" class="btn btn-primary">DELETE</button>
+        <button (click)="readMovie(movie.movieId)">Update</button>
       </div>
     </div>
   </div>
-
 </div>
+
+<swiper [config]="config" #usefulSwiper>
+
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide" *ngFor="let slide of movies">
+      <img src="assets/image/2.jpg" width="100" height="100" /><br>
+      {{slide.movieName}}
+    </div>
+
+  </div>
+
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- Add Arrows -->
+  <div class="swiper-button-next" (click)="nextSlide()"></div>
+  <div class="swiper-button-prev" (click)="previousSlide()"></div>
+</swiper>

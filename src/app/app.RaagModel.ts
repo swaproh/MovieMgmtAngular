@@ -13,6 +13,7 @@ export class RaagEntity{
     avroh:string;
     pakad:string;
     sandarbh:string;
+    gat: string;
     swarVistar:SwarSamuhEntity = new SwarSamuhEntity();
     aalapi:SwarSamuhEntity = new SwarSamuhEntity();
     taana:SwarSamuhEntity = new SwarSamuhEntity();

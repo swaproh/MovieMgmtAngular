@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MovieDataManagement": {
+    "MovieMgmtAngular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/MovieDataManagement",
+            "outputPath": "dist/MovieMgmtAngular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,7 +25,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"  
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/swiper/swiper-bundle.css"  
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -67,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MovieDataManagement:build"
+            "browserTarget": "MovieMgmtAngular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MovieDataManagement:build:production"
+              "browserTarget": "MovieMgmtAngular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MovieDataManagement:build"
+            "browserTarget": "MovieMgmtAngular:build"
           }
         },
         "test": {
@@ -94,7 +95,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"  
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/swiper/swiper-bundle.css"  
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -119,15 +121,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "MovieDataManagement:serve"
+            "devServerTarget": "MovieMgmtAngular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "MovieDataManagement:serve:production"
+              "devServerTarget": "MovieMgmtAngular:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "MovieDataManagement"
+  "defaultProject": "MovieMgmtAngular"
 }

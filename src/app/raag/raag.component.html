@@ -136,9 +136,9 @@
                             [ngClass]="{'input-group-focus':focus1===true}">
                         </div>
                         <label for="pakad" style="font-size: large;"><b>Enter pakad: </b></label><br>
-                        <input type="text" placeholder="Enter pakad" class="form-control" (focus)="focus1=true" id="pakad"
+                        <textarea placeholder="Enter pakad" class="form-control" (focus)="focus1=true" id="pakad"
                             name="pakad" [(ngModel)]="raag.pakad" (blur)="focus1=false" required="true">
-
+                        </textarea>
                     </div>
 
                     <div class="col p-3">
@@ -146,10 +146,22 @@
                             [ngClass]="{'input-group-focus':focus1===true}">
                         </div>
                         <label for="sandarbh" style="font-size: large;"><b>Enter sandarbh: </b></label><br>
-                        <input type="text" placeholder="Enter sandarbh" class="form-control" (focus)="focus1=true"
+                        <textarea placeholder="Enter sandarbh" class="form-control" (focus)="focus1=true"
                             id="sandarbh" name="sandarbh" [(ngModel)]="raag.sandarbh" (blur)="focus1=false"
-                            required="true">
+                            required="true"></textarea>
 
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 mb-1">
+                    <div class="col p-3">
+                        <div class="input-group form-group-no-border input-lg"
+                            [ngClass]="{'input-group-focus':focus1===true}">
+                        </div>
+                        <label for="gat" style="font-size: large;"><b>Enter Gat: </b></label><br>
+                        <textarea placeholder="Enter Gat" class="form-control" (focus)="focus1=true" id="gat"
+                            name="gat" [(ngModel)]="raag.gat" (blur)="focus1=false" required="true">
+                        </textarea>
                     </div>
                 </div>
 

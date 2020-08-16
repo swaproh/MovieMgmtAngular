@@ -8,6 +8,7 @@ import { Language } from './app.LanguageModel';
 import { Country } from './app.CountryModel';
 import { SongEntity } from './app.SongModel';
 import { RaagEntity } from './app.RaagModel';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -19,6 +20,12 @@ export class DataService {
   object:any
 
   constructor(private http:HttpClient) { }
+
+  // login
+  login(loginPayload)// : Observable<ApiResponse>
+  {
+    return this.http.post(this.url+'/token/generate-token',loginPayload);
+  }
 //Movie
   createMovie(movie){
 
@@ -30,9 +37,9 @@ export class DataService {
     return this.http.get<MovieEntity>(this.url+'/movie'+'/read'+'/'+id)
   }
 
-  readAllMovie(){
+  readAllMovie(pn, ps){
   
-    return this.http.get<MovieEntity[]>(this.url+'/movie'+'/readAll')
+    return this.http.get<MovieEntity[]>(this.url+'/movie'+'/readAll?pageNumber='+pn+'&pageSize='+ps);
   }
 
   updateMovie(movie){
@@ -66,9 +73,9 @@ export class DataService {
     return this.http.get<PersonEntity>(this.url+'/person'+'/read'+'/'+id)
   }
 
-  readAllPerson(){
+  readAllPerson(pn, ps){
   
-    return this.http.get<PersonEntity[]>(this.url+'/person'+'/readAll')
+    return this.http.get<PersonEntity[]>(this.url+'/person'+'/readAll?pageNumber='+pn+'&pageSize='+ps);
   }
 
   updatePerson(person){
@@ -174,9 +181,9 @@ readSong(id){
   return this.http.get<SongEntity>(this.url+'/song'+'/read'+'/'+id)
 }
 
-readAllSongs(){
+readAllSongs(pn, ps){
 
-  return this.http.get<SongEntity[]>(this.url+'/song'+'/readAll')
+  return this.http.get<SongEntity[]>(this.url+'/song'+'/readAll?pageNumber='+pn+'&pageSize='+ps);
 }
 
 updateSong(song){
@@ -225,9 +232,9 @@ readRaag(id){
   return this.http.get<RaagEntity>(this.url+'/raag'+'/read'+'/'+id)
 }
 
-readAllRaagas(){
+readAllRaagas(pn,ps){
 
-  return this.http.get<RaagEntity[]>(this.url+'/raag'+'/readAll')
+  return this.http.get<RaagEntity[]>(this.url+'/raag'+'/readAll?pageNumber='+pn+'&pageSize='+ps);
 }
 
 updateRaag(raag){

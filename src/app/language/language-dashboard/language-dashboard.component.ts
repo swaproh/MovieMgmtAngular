@@ -23,6 +23,10 @@ export class LanguageDashboardComponent implements OnInit {
      }
 
   ngOnInit() {
+    if(!window.localStorage.getItem('token')) {
+      this.router.navigate(['login']);
+      return;
+    }
     this.readAllLanguages();
   }
 

@@ -15,10 +15,11 @@ import { CountryComponent } from './country/country.component';
 import { CompanyComponent } from './company/company.component';
 import { LanguageComponent } from './language/language.component';
 import { SongComponent } from './song/song.component';
-import { SongDashboardComponent } from './Song/song-dashboard/song-dashboard.component';
 import { RaagComponent } from './raag/raag.component';
-import { RaagDashboardComponent } from './Raag/raag-dashboard/raag-dashboard.component';
-
+import { SongDashboardComponent } from './song/song-dashboard/song-dashboard.component';
+import { RaagDashboardComponent } from './raag/raag-dashboard/raag-dashboard.component';
+import { NavbarComponent } from './template/navbar/navbar.component';
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   {path:"movie",component:MovieComponent},
@@ -34,11 +35,13 @@ const routes: Routes = [
   {path:"languageDash",component:LanguageDashboardComponent},
   {path:"countryDash",component:CountryDashboardComponent},
   {path:"home",component:HomeComponent},
-  {path:"log",component:LoginComponent},
+  {path:"login",component:LoginComponent},
   {path:"song", component:SongComponent},
   {path:"songDash", component:SongDashboardComponent},
   {path:"raag", component:RaagComponent},
-  {path:"raagDash", component:RaagDashboardComponent}
+  {path:"raagDash", component:RaagDashboardComponent},
+  {path:"navbar", component:NavbarComponent},
+  {path:"logout", component:LogoutComponent}
 ];
 
 @NgModule({
@@ -46,3 +49,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+

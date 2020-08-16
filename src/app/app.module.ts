@@ -10,7 +10,7 @@ import { FooterComponent } from './template/footer/footer.component';
 import { PersonComponent } from './person/person.component';
 import { RoleComponent } from './role/role.component';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { PersondashboardComponent } from './person/persondashboard/persondashboard.component';
 import { RoledashboardComponent } from './role/roledashboard/roledashboard.component';
@@ -23,10 +23,12 @@ import { CountryComponent } from './country/country.component';
 import { CountryDashboardComponent } from './country/country-dashboard/country-dashboard.component';
 import { LanguageDashboardComponent } from './language/language-dashboard/language-dashboard.component';
 import { SongComponent } from './song/song.component';
-import { SongDashboardComponent } from './Song/song-dashboard/song-dashboard.component';
+import { SongDashboardComponent } from './song/song-dashboard/song-dashboard.component';
 import { RaagComponent } from './raag/raag.component';
-import { RaagDashboardComponent } from './Raag/raag-dashboard/raag-dashboard.component';
-
+import { RaagDashboardComponent } from './raag/raag-dashboard/raag-dashboard.component';
+import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { TokenInterceptor } from './core/interceptor';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
@@ -53,6 +55,7 @@ import { RaagDashboardComponent } from './Raag/raag-dashboard/raag-dashboard.com
     SongDashboardComponent,
     RaagComponent,
     RaagDashboardComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,8 +64,11 @@ import { RaagDashboardComponent } from './Raag/raag-dashboard/raag-dashboard.com
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
+    NgxUsefulSwiperModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

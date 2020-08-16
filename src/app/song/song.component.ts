@@ -31,9 +31,9 @@ export class SongComponent implements OnInit {
   ngOnInit() {
    
     this.dataService.readAllRole().subscribe((rs: any[]) => { this.RolesArray = rs });
-    this.dataService.readAllPerson().subscribe((rs: any[]) => { this.PersonArray = rs })
-    this.dataService.readAllMovie().subscribe((rs: any[]) => { this.movieArray = rs })
-    this.dataService.readAllRaagas().subscribe((rs: any[]) => {this.raagArray = rs });
+    this.dataService.readAllPerson(0,5).subscribe((rs: any[]) => { this.PersonArray = rs })
+    this.dataService.readAllMovie(0,5).subscribe((rs: any[]) => { this.movieArray = rs })
+    this.dataService.readAllRaagas(0,5).subscribe((rs: any[]) => {this.raagArray = rs });
     this.songForm = new FormGroup(
       {
         id: new FormControl(''),

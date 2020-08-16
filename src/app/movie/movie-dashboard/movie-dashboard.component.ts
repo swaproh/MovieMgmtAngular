@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MovieEntity } from 'src/app/app.moviemodel';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { SwiperOptions } from 'swiper';
+import { SwiperComponent } from 'ngx-useful-swiper';
 
 
 @Component({
@@ -13,6 +15,9 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./movie-dashboard.component.css']
 })
 export class MovieDashboardComponent implements OnInit {
+
+  @ViewChild('usefulSwiper', { static: false }) usefulSwiper: SwiperComponent;
+
   movieForm: FormGroup;
   movie: MovieEntity=new MovieEntity();
   movies:MovieEntity[];
@@ -26,21 +31,84 @@ export class MovieDashboardComponent implements OnInit {
   companyArray: any = ['test'];
   countryArray: any = ['test'];
   languageArray: any = ['test'];
+  pageNumber: number = 0;
+  pageSize: number = 5;
+  config: SwiperOptions = {
+    pagination: { el: '.swiper-pagination', clickable: true },
+    autoHeight: true,
+    allowTouchMove: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: true
+    },
+    speed: 400,
+    spaceBetween: 100,
+    breakpoints: {
+      1024: {
+        slidesPerView: this.pageSize
+        //centeredSlides: true,
+        //width:10
+      },
+      500: {
+        slidesPerView: 3
+      },
+      400: {
+        slidesPerView: 2
+      },
+      300: {
+        slidesPerView: 1
+      }
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    loop: true,
+    on: {
+      click: () =>{
+        const ind = this.usefulSwiper.swiper.clickedIndex;
+        //alert(ind+' '+this.movies[ind].movieName);
+        this.viewMovie(this.movies[ind].movieId);
+      },
+      slideChange: () => {
+       // console.log('slideChange Event: Active Slide Index = ', this.usefulSwiper.swiper.activeIndex);
+       //alert(this.pageNumber);
+      },
+      slideChangeTransitionEnd: () => {
+        //console.log('slideChange Event');
+        //alert('slideChange')
+      },
+      slideNextTransitionStart: () => {
+       // alert('next');
+       
+      },
+      slidePrevTransitionStart: () => {
+        //alert('prev');
+       
+      }
+    }
+  };
+ // Swiper.use([Navigation]);
 
   constructor(private dataService:DataService  ,  private router: Router,
     private activatedrouter: ActivatedRoute) { 
     
-  }
+  }  
+  
 
   ngOnInit() {
-   // for list all operation
-    this.readAllMovie();
+    if(!window.localStorage.getItem('token')) {
+      this.router.navigate(['login']);
+      return;
+    }
+    this.readAllMovie(this.pageNumber, this.pageSize);
     // for update operation
     this.dataService.readAllRole().subscribe((rs: any[]) => { this.RolesArray = rs });
-    this.dataService.readAllPerson().subscribe((rs: any[]) => { this.PersonArray = rs })
+    this.dataService.readAllPerson(0,5).subscribe((rs: any[]) => { this.PersonArray = rs })
     this.dataService.readAllCompanies().subscribe((rs: any[]) => { this.companyArray = rs });
     this.dataService.readAllLanguages().subscribe((rs: any[]) => { this.languageArray = rs });
     this.dataService.readAllCountries().subscribe((rs: any[]) => { this.countryArray = rs });
+    
     this.movieForm = new FormGroup(
       {
         movieId: new FormControl(''),
@@ -63,6 +131,29 @@ export class MovieDashboardComponent implements OnInit {
         watchDate: new FormControl('')
       }
     );
+  }
+
+  //Methods
+
+  nextSlide() {
+    this.pageNumber=this.pageNumber+1;
+    // for list all operation
+    this.readAllMovie(this.pageNumber, this.pageSize);
+    this.usefulSwiper.swiper.slideNext();
+  }
+
+  previousSlide() {
+    this.pageNumber=this.pageNumber-1;
+    if(this.pageNumber<0){
+      this.pageNumber = 0;
+    }
+    // for list all operation
+    this.readAllMovie(this.pageNumber, this.pageSize);
+    this.usefulSwiper.swiper.slidePrev();
+  }
+  
+  slideToThis(index) {
+    this.usefulSwiper.swiper.slideTo(index);
   }
 
   initPerson() {
@@ -338,14 +429,15 @@ export class MovieDashboardComponent implements OnInit {
     err=>{ alert('Exception occured')})
   }
 
-  readAllMovie(){
+  readAllMovie(pn, ps){
     
-    this.dataService.readAllMovie().subscribe((rs: any[] ) => {this.movies = rs})
+    this.dataService.readAllMovie(pn, ps).subscribe((rs: any[] ) => {this.movies = rs;})
   }
 
   readMovie(id){
     // alert('hii')
     this.updateModal = true;
+    this.viewModal= false;
     this.all=false;
     this.read=true;
     console.log(id);

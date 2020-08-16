@@ -22,7 +22,10 @@ export class RoledashboardComponent implements OnInit {
     private activatedrouter: ActivatedRoute) { }
 
     ngOnInit() {
-      
+      if(!window.localStorage.getItem('token')) {
+        this.router.navigate(['login']);
+        return;
+      }
        this.dataService.readAllRole().subscribe((rs: any[] ) => {this.roles = rs});
      }
    
